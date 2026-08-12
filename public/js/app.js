@@ -1,9 +1,18 @@
 async function fetchPortfolio() {
-  const response = await fetch('/api/portfolio');
-  if (!response.ok) {
-    return null;
-  }
-  return response.json();
+    try {
+        // Try Express API endpoint first (for local node server)
+        let response = await fetch('/api/portfolio');
+        if (!response.ok) {
+            // Fall back to static JSON file (for GitHub Pages)
+            response = await fetch('./data/portfolio.json');
+        }
+        if (!response.ok) return null;
+        return await response.json();
+    } catch (error) {
+        // Fallback fetch if /api/portfolio throws a network error
+        const fallback = await fetch('./data/portfolio.json');
+        return fallback.ok ? await fallback.json() : null;
+    }
 }
 
 function setText(selector, text) {

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Portfolio CMS</title>
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">ADMIN PANEL</div>
+      <nav class="nav-list">
+        <button data-section="dashboard" class="nav-item active">Dashboard</button>
+        <button data-section="personal" class="nav-item">Personal</button>
+        <button data-section="about" class="nav-item">About</button>
+        <button data-section="statistics" class="nav-item">Statistics</button>
+        <button data-section="skills" class="nav-item">Skills</button>
+        <button data-section="experience" class="nav-item">Experience</button>
+        <button data-section="training" class="nav-item">Training</button>
+        <button data-section="projects" class="nav-item">Projects</button>
+        <button data-section="certifications" class="nav-item">Certifications</button>
+        <button data-section="education" class="nav-item">Education</button>
+        <button data-section="social" class="nav-item">Social Links</button>
+        <button data-section="settings" class="nav-item">Settings</button>
+        <button id="logout-button" class="nav-item logout">Logout</button>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <section id="login-panel" class="panel login-panel">
+        <h1>Admin Login</h1>
+        <form id="login-form">
+          <label>Username<input type="text" name="username" required /></label>
+          <label>Password<input type="password" name="password" required /></label>
+          <button type="submit" class="btn-primary">Login</button>
+          <p id="login-message" class="message"></p>
+        </form>
+      </section>
+
+      <section id="dashboard-panel" class="panel admin-panel hidden">
+        <header class="admin-header">
+          <div>
+            <p class="eyebrow">Portfolio Admin</p>
+            <h1>Welcome, <span id="admin-name">Admin</span></h1>
+          </div>
+          <div class="status-box" id="admin-status"></div>
+        </header>
+        <div class="dashboard-grid">
+          <div class="stat-card">
+            <h3>Projects</h3>
+            <p id="summary-projects">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Skills</h3>
+            <p id="summary-skills">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Certifications</h3>
+            <p id="summary-certs">0</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="editor-panel" class="editor-panel hidden">
+        <div class="section-header">
+          <h2 id="section-title">Section</h2>
+          <span id="save-status" class="message"></span>
+        </div>
+
+        <div id="section-content">
+          <div id="personal-section" class="section-content hidden">
+            <form id="personal-form" class="form-grid">
+              <label>Name<input name="name" /></label>
+              <label>Professional Title<input name="title" /></label>
+              <label>Tagline<input name="tagline" /></label>
+              <label>Description<textarea name="description"></textarea></label>
+              <label>Email<input name="email" type="email" /></label>
+              <label>Phone<input name="phone" /></label>
+              <label>Location<input name="location" /></label>
+              <label>GitHub URL<input name="github" type="url" /></label>
+              <label>LinkedIn URL<input name="linkedin" type="url" /></label>
+              <label>Profile Image Path<input name="profileImage" /></label>
+              <label>Resume Path<input name="resume" /></label>
+              <label>Architecture Image Path<input name="architectureImage" /></label>
+              <div class="form-actions">
+                <button type="button" id="save-personal" class="btn-primary">Save Changes</button>
+                <button type="button" id="reset-personal" class="btn-secondary">Reset</button>
+              </div>
+            </form>
+            <div class="upload-row">
+              <div>
+                <p>Upload Profile Image</p>
+                <input type="file" id="profile-upload" accept="image/png, image/jpeg" />
+                <button id="upload-profile" class="btn-primary small">Upload</button>
+              </div>
+              <div>
+                <p>Upload Resume</p>
+                <input type="file" id="resume-upload" accept="application/pdf" />
+                <button id="upload-resume" class="btn-primary small">Upload</button>
+              </div>
+              <div>
+                <p>Upload Architecture Image</p>
+                <input type="file" id="architecture-upload" accept="image/png, image/jpeg" />
+                <button id="upload-architecture" class="btn-primary small">Upload</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="about-section" class="section-content hidden">
+            <form id="about-form" class="form-grid">
+              <label>Heading<input name="heading" /></label>
+              <label>Description<textarea name="description"></textarea></label>
+              <div class="form-actions">
+                <button type="button" id="save-about" class="btn-primary">Save Changes</button>
+                <button type="button" id="reset-about" class="btn-secondary">Reset</button>
+              </div>
+            </form>
+          </div>
+
+          <div id="statistics-section" class="section-content hidden">
+            <div class="section-actions">
+              <button id="add-statistic" class="btn-primary small">Add Statistic</button>
+            </div>
+            <div id="statistics-list" class="list-panel"></div>
+            <div class="form-actions">
+              <button id="save-statistics" class="btn-primary">Save Statistics</button>
+            </div>
+          </div>
+
+          <div id="skills-section" class="section-content hidden">
+            <div class="skill-grid-admin" id="skills-editor"></div>
+            <div class="form-actions">
+              <button id="save-skills" class="btn-primary">Save Skills</button>
+            </div>
+          </div>
+
+          <div id="experience-section" class="section-content hidden">
+            <div class="section-actions">
+              <button id="add-experience" class="btn-primary small">Add Experience</button>
+            </div>
+            <div id="experience-list" class="list-panel"></div>
+            <div class="form-actions">
+              <button id="save-experience" class="btn-primary">Save Experience</button>
+            </div>
+          </div>
+
+          <div id="training-section" class="section-content hidden">
+            <div class="section-actions">
+              <button id="add-training" class="btn-primary small">Add Training</button>
+            </div>
+            <div id="training-list" class="list-panel"></div>
+            <div class="form-actions">
+              <button id="save-training" class="btn-primary">Save Training</button>
+            </div>
+          </div>
+
+          <div id="projects-section" class="section-content hidden">
+            <div class="section-actions">
+              <button id="add-project" class="btn-primary small">Add Project</button>
+            </div>
+            <div class="upload-row">
+              <div>
+                <p>Upload Project Image</p>
+                <input type="file" id="project-upload" accept="image/png, image/jpeg" />
+                <button id="upload-project" class="btn-primary small">Upload</button>
+              </div>
+            </div>
+            <div id="projects-list" class="list-panel"></div>
+            <div class="form-actions">
+              <button id="save-projects" class="btn-primary">Save Projects</button>
+            </div>
+          </div>
+
+          <div id="certifications-section" class="section-content hidden">
+            <div class="section-actions">
+              <button id="add-certification" class="btn-primary small">Add Certification</button>
+            </div>
+            <div id="certifications-list" class="list-panel"></div>
+            <div class="form-actions">
+              <button id="save-certifications" class="btn-primary">Save Certifications</button>
+            </div>
+          </div>
+
+          <div id="education-section" class="section-content hidden">
+            <div class="section-actions">
+              <button id="add-education" class="btn-primary small">Add Education</button>
+            </div>
+            <div id="education-list" class="list-panel"></div>
+            <div class="form-actions">
+              <button id="save-education" class="btn-primary">Save Education</button>
+            </div>
+          </div>
+
+          <div id="social-section" class="section-content hidden">
+            <form id="social-form" class="form-grid">
+              <label>GitHub URL<input name="github" type="url" /></label>
+              <label>LinkedIn URL<input name="linkedin" type="url" /></label>
+              <label>Email<input name="email" type="email" /></label>
+              <label>Other URL<input name="other" type="url" /></label>
+              <div class="form-actions">
+                <button type="button" id="save-social" class="btn-primary">Save Social</button>
+              </div>
+            </form>
+          </div>
+
+          <div id="settings-section" class="section-content hidden">
+            <form id="settings-form" class="form-grid">
+              <label>Site title<input name="siteTitle" /></label>
+              <label>Meta description<textarea name="siteDescription"></textarea></label>
+              <label><input type="checkbox" name="showHero" /> Show hero</label>
+              <label><input type="checkbox" name="showProjects" /> Show projects</label>
+              <label><input type="checkbox" name="showSkills" /> Show skills</label>
+              <label><input type="checkbox" name="showCertifications" /> Show certifications</label>
+              <label><input type="checkbox" name="showContact" /> Show contact</label>
+              <div class="form-actions">
+                <button type="button" id="save-settings" class="btn-primary">Save Settings</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lasya Mandapati</title>
+  <meta name="description" content="Premium Cloud & DevOps portfolio with deployment automation and infrastructure visuals." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero-section" id="hero-section">
+      <div class="hero-side">
+        <div class="hero-name">Lasya Mandapati</div>
+        <div class="hero-avatar"><img id="profile-image" src="/assets/profile.jpg" alt="Profile image" /></div>
+      </div>
+      <div class="hero-copy">
+        <h1 id="hero-title">Architecting resilient cloud systems, automating pipelines, and optimizing delivery.</h1>
+        <p id="hero-tagline">AWS and DevOps Engineer specializing in building scalable cloud infrastructure, designing CI/CD deployment pipelines, and managing automated workflows. Passionate about leveraging cloud services to create highly available, reliable, and secure systems.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" id="resume-link" href="#" target="_blank">Download Resume</a>
+          <a class="btn btn-secondary icon-button" id="github-link" href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit GitHub profile">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a class="btn btn-secondary icon-button" id="linkedin-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn profile">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a class="btn btn-secondary" id="contact-link" href="#contact">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Architecture Image Section -->
+     <section class="architecture-preview-section">
+      <div class="panel glass architecture-panel">
+        <img src="assets/architecture.png" alt="Cloud Architecture Diagram" class="architecture-img">
+      </div>
+    </section>
+
+    <main>
+      <section class="section intro" id="about-section">
+        <div class="section-head"><h2>About</h2></div>
+        <div class="grid two-column">
+          <div class="panel glass" id="about-text"></div>
+          <div class="panel glass stats-panel" id="stats-container"></div>
+        </div>
+      </section>
+
+      <section class="section skills" id="skills-section">
+        <div class="section-head"><h2>Skills</h2></div>
+        <div class="skill-grid" id="skills-grid"></div>
+      </section>
+
+      <section class="section projects" id="projects-section">
+        <div class="section-head"><h2>Featured Projects</h2></div>
+        <div class="project-grid" id="projects-grid"></div>
+      </section>
+
+      <section class="section training" id="training-section">
+        <div class="section-head"><h2>Hands-on</h2></div>
+        <div class="training-grid" id="training-list"></div>
+      </section>
+
+      <section class="section certifications" id="certifications-section">
+        <div class="section-head"><h2>Certifications</h2></div>
+        <div class="cert-grid" id="certifications-list"></div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div class="section-head"><h2>Contact</h2></div>
+        <div class="contact-panel glass">
+          <div>
+            <h3 id="contact-name"></h3>
+            <p id="contact-title"></p>
+            <p id="contact-location"></p>
+          </div>
+          <div class="contact-links">
+            <a id="contact-email" href="mailto:"></a>
+            <a id="contact-github" href="" target="_blank">GitHub</a>
+            <a id="contact-linkedin" href="" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer-panel"><a href="/admin.html">Admin</a></footer>
+  </div>
+  <script src="js/app.js"></script>
+  <script>
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
+    document.body.appendChild(tooltip);
+
+    const showTooltip = (event) => {
+      const target = event.currentTarget;
+      const text = target.dataset.tooltip;
+      if (!text) return;
+
+      tooltip.textContent = text;
+      tooltip.classList.add('visible');
+
+      const offset = 16;
+      tooltip.style.left = `${event.clientX + offset}px`;
+      tooltip.style.top = `${event.clientY + offset}px`;
+    };
+
+    const hideTooltip = () => {
+      tooltip.classList.remove('visible');
+    };
+
+    document.querySelectorAll('.arch-node, .arch-cloud').forEach((node) => {
+      node.addEventListener('mousemove', showTooltip);
+      node.addEventListener('mouseleave', hideTooltip);
+      node.addEventListener('focus', showTooltip);
+      node.addEventListener('blur', hideTooltip);
+      node.setAttribute('tabindex', '0');
+    });
+  </script>
+</body>
+</html>

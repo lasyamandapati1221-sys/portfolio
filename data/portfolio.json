@@ -1,0 +1,190 @@
+{
+  "personal": {
+    "name": "Lasya Mandapati",
+    "title": "DevOps & Cloud Engineer",
+    "tagline": "Architecting resilient cloud systems, automating pipelines, and optimizing delivery.",
+    "description": "AWS and DevOps Engineer specializing in building scalable cloud infrastructure, designing CI/CD deployment pipelines, and managing automated workflows. Passionate about leveraging cloud services to create highly available, reliable, and secure systems.",
+    "email": "lasyamandapati1221@gmail.com",
+    "phone": "+1 (555) 123-4567",
+    "location": "Hyderabad, India",
+    "github": "https://github.com/lasyamandapati1221-sys",
+    "linkedin": "https://www.linkedin.com/in/lasya-mandapati",
+    "profileImage": "/assets/1786544152993-WhatsApp_Image_2026-08-12_at_7.44.10_PM.jpeg",
+    "resume": "/assets/1786542915240-LASYA_CV.pdf",
+    "architectureImage": ""
+  },
+  "about": {
+    "heading": "Building scalable infrastructure, automating delivery, and monitoring modern cloud environments.",
+    "description": "I’m Lasya Mandapati, a Computer Science & Engineering graduate and aspiring DevOps & Cloud Engineer with hands-on training in cloud infrastructure, automation, CI/CD, containers, Kubernetes, and monitoring.\n\nI’ve worked with technologies including AWS, Azure, GCP, Terraform, Ansible, Jenkins, GitHub Actions, Docker, Kubernetes, Prometheus, Grafana, and cloud security tools through practical learning and project implementations.\n\nI’m looking to begin my career in a Cloud or DevOps role where I can apply my skills, solve real-world infrastructure challenges, and continue growing as an engineer.\n"
+  },
+  "statistics": [
+    {
+      "id": 1786559073125.8645,
+      "label": "AWS",
+      "value": "CLOUD PLATFORM",
+      "description": "Primary cloud platform for infrastructure automation"
+    },
+    {
+      "id": 1786559073126.5574,
+      "label": "Docker",
+      "value": "CONTAINERIZATION",
+      "description": "Packaging and isolating microservices application environments"
+    },
+    {
+      "id": 1786559073126.2402,
+      "label": "Kubernetes",
+      "value": "ORCHESTRATION",
+      "description": "Container orchestration, scaling, and cluster management"
+    }
+  ],
+  "skills": {
+    "cloud": [
+      "AWS",
+      "EC2",
+      "S3",
+      "IAM",
+      "VPC",
+      "ALB",
+      "Route 53"
+    ],
+    "devops": [
+      "Git",
+      "GitHub",
+      "Jenkins",
+      "CI/CD",
+      "Ansible"
+    ],
+    "iac": [
+      "Terraform",
+      "Variables",
+      "Outputs",
+      "Count",
+      "for_each",
+      "depends_on",
+      "lifecycle"
+    ],
+    "containers": [
+      "Docker",
+      "Dockerfile",
+      "Images",
+      "Containers"
+    ],
+    "kubernetes": [
+      "Pods",
+      "Deployments",
+      "Services",
+      "ConfigMaps",
+      "Secrets",
+      "PV",
+      "PVC",
+      "Storage Classes"
+    ],
+    "programming": [
+      "Python",
+      "Bash",
+      "JavaScript"
+    ],
+    "operatingSystems": [
+      "Linux",
+      "Ubuntu"
+    ]
+  },
+  "experience": [
+    {
+      "id": 1,
+      "company": "CloudOps Labs",
+      "role": "DevOps Intern",
+      "startDate": "2024-06",
+      "endDate": "Present",
+      "description": "Supporting platform reliability by creating infrastructure automation and monitoring pipelines.",
+      "technologies": [
+        "AWS",
+        "Terraform",
+        "Docker",
+        "Jenkins"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": 1,
+      "degree": "Computer Science Engineering",
+      "institution": "Example University",
+      "startYear": "2020",
+      "graduationYear": "2024",
+      "description": "Focused on cloud computing, distributed systems, and DevOps toolchains."
+    }
+  ],
+  "training": [
+    {
+      "id": 1,
+      "title": "AWS Fundamentals Hands-On Learning Notes",
+      "description": "A step-by-step walkthrough of core AWS services, server setup, storage, scaling, and access management documented during practical console implementation.",
+      "tags": [
+        "EC2",
+        "AMI",
+        "S3",
+        "AWS CLI",
+        "Nginx",
+        "Auto Scaling",
+        "CloudWatch",
+        "IAM"
+      ],
+      "pdfUrl": "/assets/aws hands-on.pdf"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Highly Available AWS Web Application",
+      "projectNumber": 1,
+      "shortDescription": "Automated deployment of a resilient web application with Terraform and ECS.",
+      "description": "Designed a fault-tolerant architecture with autoscaling, load balancing, and secure networking across multiple availability zones.",
+      "technologies": [
+        "AWS",
+        "Terraform",
+        "ECS",
+        "ALB",
+        "CloudWatch"
+      ],
+      "github": "https://github.com/lasya/aws-web-app",
+      "liveDemo": "https://example-app.aws",
+      "featured": true,
+      "image": "",
+      "architecture": "Infrastructure as Code with Terraform, container registry, and a CI/CD pipeline for deployments."
+    }
+  ],
+  "certifications": [
+    {
+      "id": 1,
+      "name": "AWS Cloud Quest - Cloud Practitioner",
+      "issuer": "Amazon Web Services",
+      "date": "10-08-2026",
+      "credentialUrl": "https://www.credly.com/badges/ca99cdc6-34d5-4b5a-9dac-8273f7aedafa/linked_in_profile",
+      "badgeImage": "/assets/aws-cloud-badge.png"
+    },
+    {
+      "id": 2,
+      "name": "Oracle Certified Foundations Associate ",
+      "issuer": "Oracle",
+      "date": "11/08/2026",
+      "credentialUrl": "https://catalog-education.oracle.com/pls/certview/sharebadge?id=7A576281A2C627C3C68C6F761130435D6471BEEFE49513F7F27CF0D48CB2FA9B",
+      "badgeImage": "/assets/oracle-badge.jpg"
+    }
+  ],
+  "socialLinks": {
+    "github": "https://github.com/lasya",
+    "linkedin": "https://linkedin.com/in/lasya",
+    "email": "lasya@example.com",
+    "other": ""
+  },
+  "settings": {
+    "siteTitle": "Lasya Mandapati | Cloud & DevOps Engineer",
+    "siteDescription": "Cloud automation, CI/CD, and infrastructure excellence for modern deployments.",
+    "showHero": true,
+    "showProjects": true,
+    "showSkills": true,
+    "showCertifications": true,
+    "showContact": true
+  }
+}

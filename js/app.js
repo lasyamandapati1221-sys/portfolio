@@ -44,7 +44,7 @@ function setLink(selector, url, text) {
 function setImage(selector, url) {
   const el = document.getElementById(selector);
   if (el) {
-    el.src = url || '/assets/profile.jpg';
+    el.src = url || '/assets/profile.jpeg';
   }
 }
 

@@ -14,7 +14,7 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'lasya123';
 const SESSION_SECRET = process.env.SESSION_SECRET || 'change-this-secret';
 const DATA_FILE = path.join(__dirname, 'data', 'portfolio.json');
 const BACKUP_DIR = path.join(__dirname, 'data', 'backups');
-const PUBLIC_DIR = path.join(__dirname, 'public');
+const PUBLIC_DIR = __dirname;
 
 const upload = multer({
   storage: multer.diskStorage({

@@ -44,7 +44,7 @@ function setLink(selector, url, text) {
 function setImage(selector, url) {
   const el = document.getElementById(selector);
   if (el) {
-    el.src = url || '/assets/profile.jpeg';
+    el.src = url || 'assets/profile.jpeg';
   }
 }
 
@@ -73,7 +73,7 @@ function renderStats(stats) {
     card.innerHTML = `
       <div class="stat-card-header">
         <div class="stat-heading">
-          <span class="stat-icon"><i class="${meta.icon}"></i></span>
+          <span class="stat-icon">${meta.svg ? `<img src="${meta.svg}" alt="${stat.label} logo" style="width:20px;height:20px;object-fit:contain;">` : `<i class="${meta.icon}"></i>`}</span>
           <h3>${stat.label}</h3>
         </div>
         <span class="stat-badge">${meta.badge}</span>
@@ -86,40 +86,21 @@ function renderStats(stats) {
 
 function getSkillStyle(item = '') {
   const key = String(item).toLowerCase();
-
-  if (key.includes('aws') || key.includes('ec2') || key.includes('s3') || key.includes('iam') || key.includes('vpc')) {
-    return { icon: 'fa-brands fa-aws', color: '#FF9900' };
-  }
-  if (key.includes('github') || key.includes('git')) {
-    return { icon: 'fa-brands fa-github', color: '#F5F5F5' };
-  }
-  if (key.includes('docker') || key.includes('container')) {
-    return { icon: 'fa-brands fa-docker', color: '#2496ED' };
-  }
-  if (key.includes('kubernetes') || key.includes('pod') || key.includes('deploy') || key.includes('service') || key.includes('secret') || key.includes('pv') || key.includes('pvc')) {
-    return { icon: 'fa-solid fa-dharmachakra', color: '#326CE5' };
-  }
-  if (key.includes('terraform') || key.includes('ansible') || key.includes('iac')) {
-    return { icon: 'fa-solid fa-server', color: '#7B42BC' };
-  }
-  if (key.includes('prometheus') || key.includes('grafana') || key.includes('cloudwatch')) {
-    return { icon: 'fa-solid fa-chart-line', color: '#E6522C' };
-  }
-  if (key.includes('sonar') || key.includes('security') || key.includes('iam')) {
-    return { icon: 'fa-solid fa-shield-alt', color: '#4E9A51' };
-  }
-  if (key.includes('python') || key.includes('bash') || key.includes('javascript')) {
-    return { icon: 'fa-brands fa-python', color: '#3776AB' };
-  }
-  if (key.includes('linux') || key.includes('ubuntu')) {
-    return { icon: 'fa-brands fa-linux', color: '#FCC624' };
-  }
-  if (key.includes('copilot') || key.includes('chatgpt') || key.includes('k8sgpt') || key.includes('ai')) {
-    return { icon: 'fa-solid fa-robot', color: '#7C3AED' };
-  }
-  if (key.includes('jenkins') || key.includes('ci') || key.includes('cd')) {
-    return { icon: 'fa-solid fa-code-branch', color: '#D24939' };
-  }
+  // Prefer official brand SVGs (SimpleIcons) where possible, fall back to FontAwesome classes
+  if (key.includes('terraform')) return { svg: 'https://cdn.simpleicons.org/terraform/7B42BC', color: '#7B42BC' };
+  if (key.includes('kubernetes') || key.includes('k8s')) return { svg: 'https://cdn.simpleicons.org/kubernetes/326CE5', color: '#326CE5' };
+  if (key.includes('jenkins')) return { svg: 'https://cdn.simpleicons.org/jenkins/D24939', color: '#D24939' };
+  if (key.includes('prometheus')) return { svg: 'https://cdn.simpleicons.org/prometheus/FF6A00', color: '#FF6A00' };
+  if (key.includes('grafana')) return { svg: 'https://cdn.simpleicons.org/grafana/FB542B', color: '#FB542B' };
+  if (key.includes('ansible')) return { svg: 'https://cdn.simpleicons.org/ansible/EE0000', color: '#EE0000' };
+  if (key.includes('docker') || key.includes('container')) return { svg: 'https://cdn.simpleicons.org/docker/2496ED', color: '#2496ED' };
+  // Use the SAME AWS FontAwesome icon implementation as the Cloud Platforms header (do not change that header)
+  if (key.includes('aws') || key.includes('ec2') || key.includes('s3') || key.includes('iam') || key.includes('vpc') || key.includes('cloudwatch') || key.includes('cloudtrail') || key.includes('aws cli')) return { icon: 'fa-brands fa-aws', color: '#FF9900' };
+  if (key.includes('github') || key.includes('git')) return { svg: 'https://cdn.simpleicons.org/github/F5F5F5', color: '#F5F5F5' };
+  if (key.includes('python')) return { svg: 'https://cdn.simpleicons.org/python/3776AB', color: '#3776AB' };
+  if (key.includes('linux') || key.includes('ubuntu')) return { svg: 'https://cdn.simpleicons.org/linux/FCC624', color: '#FCC624' };
+  // Fallbacks
+  if (key.includes('ci') || key.includes('cd')) return { icon: 'fa-solid fa-code-branch', color: '#D24939' };
   return { icon: 'fa-solid fa-certificate', color: '#00FF88' };
 }
 
@@ -161,9 +142,10 @@ function renderSkills(skills) {
       <div class="tags">
         ${items.map(item => {
           const style = getSkillStyle(item);
+          const iconHtml = style.svg ? `<img src="${style.svg}" alt="${item} logo" style="width:18px;height:18px;object-fit:contain;display:block;">` : `<i class="${style.icon}"></i>`;
           return `
             <span class="tag" style="--tag-color: ${style.color};">
-              <span class="tag-icon" style="color: ${style.color}; border-color: ${style.color}33;"><i class="${style.icon}"></i></span>
+              <span class="tag-icon" style="color: ${style.color}; border-color: ${style.color}33;">${iconHtml}</span>
               <span class="tag-label">${item}</span>
             </span>
           `;
@@ -181,10 +163,21 @@ function renderProjects(projects) {
   projects.filter(p => p.featured).forEach(project => {
     const card = document.createElement('div');
     card.className = 'project-card';
+    const techTags = (project.technologies || []).map(tech => {
+      const key = String(tech).toLowerCase();
+      const awsTerms = ['aws','ec2','s3','iam','vpc','alb','route','route 53','cloudwatch','cloudtrail','lambda'];
+      if (awsTerms.some(t => key.includes(t))) {
+        const style = getSkillStyle(tech);
+        const iconHtml = style.svg ? `<img src="${style.svg}" alt="${tech} logo" style="width:18px;height:18px;object-fit:contain;display:block;">` : `<i class="${style.icon}"></i>`;
+        return `<span class="tag" style="--tag-color: ${style.color || '#FF9900'};"><span class="tag-icon" style="color: ${style.color || '#FF9900'}; border-color: ${style.color || '#FF9900'}33;">${iconHtml}</span><span class="tag-label">${tech}</span></span>`;
+      }
+      return `<span class="tag">${tech}</span>`;
+    }).join('');
+
     card.innerHTML = `
       <h3>${project.title}</h3>
       <p>${project.shortDescription}</p>
-      <div class="tags">${(project.technologies || []).map(tech => `<span class="tag">${tech}</span>`).join('')}</div>
+      <div class="tags">${techTags}</div>
       <p><a href="${project.github || '#'}" target="_blank">GitHub</a> · <a href="${project.liveDemo || '#'}" target="_blank">Live Demo</a></p>
     `;
     container.appendChild(card);
@@ -226,16 +219,17 @@ function renderTraining(training) {
       <div class="training-tags">
         ${(techs || []).map(tech => {
           const style = getSkillStyle(tech);
+          const iconHtml = style.svg ? `<img src="${style.svg}" alt="${tech} logo" style="width:18px;height:18px;object-fit:contain;display:block;">` : `<i class="${style.icon}"></i>`;
           return `
             <span class="tag" style="--tag-color: ${style.color};">
-              <span class="tag-icon" style="color: ${style.color}; border-color: ${style.color}33;"><i class="${style.icon}"></i></span>
+              <span class="tag-icon" style="color: ${style.color}; border-color: ${style.color}33;">${iconHtml}</span>
               <span class="tag-label">${tech}</span>
             </span>
           `;
         }).join('')}
       </div>
       <div class="training-actions">
-        <a class="training-btn training-btn-primary" href="${entry.pdfUrl || '/assets/aws hands-on.pdf'}" target="_blank" rel="noopener noreferrer">
+        <a class="training-btn training-btn-primary" href="${entry.pdfUrl || 'assets/aws hands-on.pdf'}" target="_blank" rel="noopener noreferrer">
           <i class="fa-solid fa-file-pdf"></i>
           <span>View Hands-On PDF Document</span>
         </a>
@@ -294,6 +288,16 @@ function applySettings(settings) {
   document.getElementById('skills-section').style.display = settings.showSkills ? 'block' : 'none';
   document.getElementById('certifications-section').style.display = settings.showCertifications ? 'block' : 'none';
   document.getElementById('contact').style.display = settings.showContact ? 'block' : 'none';
+  // Remove Experience navigation and hide Experience section entirely (portfolio uses no Experience)
+  try {
+    document.querySelectorAll('nav a').forEach(a => {
+      if (a.textContent && a.textContent.trim().toUpperCase() === 'EXPERIENCE') a.remove();
+    });
+    const exp = document.getElementById('experience-section') || document.getElementById('experience');
+    if (exp) exp.style.display = 'none';
+  } catch (e) {
+    // ignore if nav not present
+  }
 }
 
 async function init() {
@@ -301,7 +305,43 @@ async function init() {
   if (!data) return;
   setText('hero-title', data.personal.tagline || 'Building, Automating & Deploying Cloud Infrastructure');
   setText('hero-tagline', data.personal.description || 'Premium infrastructure automation and platform delivery.');
+  // Ensure the eyebrow/label shows the role/title (e.g., "Cloud & DevOps Engineer")
+  try {
+    const eyebrow = document.querySelector('.eyebrow');
+    if (eyebrow) eyebrow.textContent = data.personal.title || eyebrow.textContent;
+  } catch (e) {}
   setLink('resume-link', data.personal.resume || '#', 'Download Resume');
+  // Inject architecture image directly after the hero (preserve portfolio layout)
+  try {
+    if (data.personal && data.personal.architectureImage) {
+      if (!document.getElementById('architecture-section')) {
+        const html = `
+          <section id="architecture-section" class="architecture-preview-section section">
+            <div class="architecture-panel panel">
+              <img id="architecture-image" class="architecture-img" src="${data.personal.architectureImage}" alt="Architecture Diagram">
+            </div>
+          </section>`;
+        const hero = document.getElementById('hero-section');
+        if (hero && hero.parentNode) {
+          hero.parentNode.insertBefore(document.createRange().createContextualFragment(html), hero.nextSibling);
+        }
+      } else {
+        const img = document.getElementById('architecture-image');
+        if (img) img.src = data.personal.architectureImage;
+      }
+    }
+  } catch (e) {
+    // fail quietly if DOM not matching
+  }
+  // Ensure both hero and footer GitHub/LinkedIn anchors use the correct personal URLs
+  try {
+    const githubUrl = data.personal.github || (data.socialLinks && data.socialLinks.github) || '#';
+    const linkedinUrl = data.personal.linkedin || (data.socialLinks && data.socialLinks.linkedin) || '#';
+    document.querySelectorAll('.contact-github').forEach(a => { try { a.href = githubUrl; a.textContent = a.textContent || 'GitHub'; } catch(e){} });
+    document.querySelectorAll('.contact-linkedin').forEach(a => { try { a.href = linkedinUrl; a.textContent = a.textContent || 'LinkedIn'; } catch(e){} });
+  } catch (e) {
+    // ignore
+  }
   const headingHtml = data.about.heading ? `<h3>${data.about.heading}</h3>` : '';
   const bodyHtml = (data.about.description || '')
     .split('\n')
@@ -313,7 +353,6 @@ async function init() {
   renderStats(data.statistics || []);
   renderSkills(data.skills || {});
   renderProjects(data.projects || []);
-  renderExperience(data.experience || []);
   renderTraining(data.training || []);
   renderCertifications(data.certifications || []);
   setContact(data.personal, data.socialLinks || {});

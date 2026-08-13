@@ -1,17 +1,17 @@
 {
   "personal": {
     "name": "Lasya Mandapati",
-    "title": "DevOps & Cloud Engineer",
-    "tagline": "Architecting resilient cloud systems, automating pipelines, and optimizing delivery.",
-    "description": "AWS and DevOps Engineer specializing in building scalable cloud infrastructure, designing CI/CD deployment pipelines, and managing automated workflows. Passionate about leveraging cloud services to create highly available, reliable, and secure systems.",
+    "title": "Cloud & DevOps Engineer",
+    "tagline": "Building and automating cloud infrastructure with DevOps practices.",
+    "description": "Aspiring Cloud & DevOps Engineer with hands-on practical training in cloud infrastructure, automation, CI/CD, containers, Kubernetes, and monitoring. Seeking entry-level opportunities to apply practical skills and continue learning as an engineer.",
     "email": "lasyamandapati1221@gmail.com",
     "phone": "+1 (555) 123-4567",
     "location": "Hyderabad, India",
     "github": "https://github.com/lasyamandapati1221-sys",
     "linkedin": "https://www.linkedin.com/in/lasya-mandapati",
-    "profileImage": "/assets/profile.jpeg",
-    "resume": "/assets/1786542915240-LASYA_CV.pdf",
-    "architectureImage": ""
+    "profileImage": "assets/profile.jpeg",
+    "resume": "assets/1786542915240-LASYA_CV.pdf",
+    "architectureImage": "assets/architecture.png"
   },
   "about": {
     "heading": "Building scalable infrastructure, automating delivery, and monitoring modern cloud environments.",
@@ -89,22 +89,7 @@
       "Ubuntu"
     ]
   },
-  "experience": [
-    {
-      "id": 1,
-      "company": "CloudOps Labs",
-      "role": "DevOps Intern",
-      "startDate": "2024-06",
-      "endDate": "Present",
-      "description": "Supporting platform reliability by creating infrastructure automation and monitoring pipelines.",
-      "technologies": [
-        "AWS",
-        "Terraform",
-        "Docker",
-        "Jenkins"
-      ]
-    }
-  ],
+  "experience": [],
   "education": [
     {
       "id": 1,
@@ -130,7 +115,7 @@
         "CloudWatch",
         "IAM"
       ],
-      "pdfUrl": "/assets/aws hands-on.pdf"
+      "pdfUrl": "assets/aws hands-on.pdf"
     }
   ],
   "projects": [
@@ -161,7 +146,7 @@
       "issuer": "Amazon Web Services",
       "date": "10-08-2026",
       "credentialUrl": "https://www.credly.com/badges/ca99cdc6-34d5-4b5a-9dac-8273f7aedafa/linked_in_profile",
-      "badgeImage": "/assets/aws-cloud-badge.png"
+      "badgeImage": "assets/aws-cloud-badge.png"
     },
     {
       "id": 2,
@@ -169,12 +154,12 @@
       "issuer": "Oracle",
       "date": "11/08/2026",
       "credentialUrl": "https://catalog-education.oracle.com/pls/certview/sharebadge?id=7A576281A2C627C3C68C6F761130435D6471BEEFE49513F7F27CF0D48CB2FA9B",
-      "badgeImage": "/assets/oracle-badge.jpg"
+      "badgeImage": "assets/oracle-badge.jpg"
     }
   ],
   "socialLinks": {
-    "github": "https://github.com/lasya",
-    "linkedin": "https://linkedin.com/in/lasya",
+    "github": "https://github.com/lasyamandapati1221-sys",
+    "linkedin": "https://www.linkedin.com/in/lasya-mandapati",
     "email": "lasya@example.com",
     "other": ""
   },

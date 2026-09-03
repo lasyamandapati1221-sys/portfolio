@@ -163,23 +163,152 @@ function renderProjects(projects) {
   projects.filter(p => p.featured).forEach(project => {
     const card = document.createElement('div');
     card.className = 'project-card';
-    const techTags = (project.technologies || []).map(tech => {
-      const key = String(tech).toLowerCase();
-      const awsTerms = ['aws','ec2','s3','iam','vpc','alb','route','route 53','cloudwatch','cloudtrail','lambda'];
-      if (awsTerms.some(t => key.includes(t))) {
-        const style = getSkillStyle(tech);
-        const iconHtml = style.svg ? `<img src="${style.svg}" alt="${tech} logo" style="width:18px;height:18px;object-fit:contain;display:block;">` : `<i class="${style.icon}"></i>`;
-        return `<span class="tag" style="--tag-color: ${style.color || '#FF9900'};"><span class="tag-icon" style="color: ${style.color || '#FF9900'}; border-color: ${style.color || '#FF9900'}33;">${iconHtml}</span><span class="tag-label">${tech}</span></span>`;
-      }
-      return `<span class="tag">${tech}</span>`;
+
+    const architecture = project.id === 2 ? {
+      boundaryLabel: 'AMAZON EKS / AWS',
+      nodes: [
+        { label: 'Git', icon: 'fa-brands fa-git-alt', x: 50, y: 28, outside: true },
+        { label: 'Docker Build', icon: 'fa-brands fa-docker', x: 50, y: 82, outside: true },
+        { label: 'Container Registry', icon: 'fa-solid fa-box', x: 50, y: 136, outside: true },
+        { label: 'Kubernetes', icon: 'fa-solid fa-dharmachakra', x: 50, y: 246 },
+        { label: 'Helm', icon: 'fa-solid fa-ship', x: 28, y: 312 },
+        { label: 'Argo CD', icon: 'fa-solid fa-arrows-rotate', x: 72, y: 312 },
+        { label: 'Microservices', icon: 'fa-solid fa-cubes', x: 50, y: 378 },
+        { label: 'HPA', icon: 'fa-solid fa-chart-line', x: 28, y: 444 },
+        { label: 'Prometheus', icon: 'fa-solid fa-fire', x: 56, y: 444 },
+        { label: 'Grafana', icon: 'fa-solid fa-chart-area', x: 82, y: 444 }
+      ],
+      paths: ['M 50 42 L 50 68', 'M 50 96 L 50 122', 'M 50 150 L 50 210', 'M 50 274 L 28 296', 'M 50 274 L 72 296', 'M 28 328 L 50 362', 'M 72 328 L 50 362', 'M 50 396 L 28 428', 'M 50 396 L 56 428', 'M 56 460 L 82 460']
+    } : {
+      boundaryLabel: 'AWS INFRASTRUCTURE',
+      nodes: [
+        { label: 'Git', icon: 'fa-brands fa-git-alt', x: 50, y: 28, outside: true },
+        { label: 'Jenkins', icon: 'fa-brands fa-jenkins', x: 50, y: 82, outside: true },
+        { label: 'SonarQube', icon: 'fa-solid fa-code', x: 50, y: 136, outside: true },
+        { label: 'Terraform', icon: 'fa-solid fa-layer-group', x: 28, y: 246 },
+        { label: 'Ansible', icon: 'fa-solid fa-gears', x: 72, y: 246 },
+        { label: 'Apache Tomcat', icon: 'fa-solid fa-server', x: 50, y: 320 },
+        { label: 'Prometheus', icon: 'fa-solid fa-fire', x: 28, y: 394 },
+        { label: 'Grafana', icon: 'fa-solid fa-chart-area', x: 72, y: 394 }
+      ],
+      paths: ['M 50 42 L 50 68', 'M 50 96 L 50 122', 'M 50 150 L 50 210', 'M 50 210 L 28 232', 'M 50 210 L 72 232', 'M 28 260 L 50 306', 'M 72 260 L 50 306', 'M 50 334 L 28 380', 'M 50 334 L 72 380', 'M 42 394 L 58 394']
+    };
+    const architectureNodes = architecture.nodes.map(node => `
+      <div class="architecture-node${node.outside ? ' architecture-node-outside' : ''}" style="left:${node.x}%;top:${node.y}px;">
+        <i class="${node.icon}" aria-hidden="true"></i><span>${node.label}</span>
+      </div>
+    `).join('');
+    const architecturePaths = architecture.paths.map(path => `<path class="architecture-flow" d="${path}" pathLength="1"></path>`).join('');
+    const architectureBoundary = project.id === 2 ? 'CLUSTER WORKLOAD ZONE' : 'DELIVERY &amp; OBSERVABILITY ZONE';
+
+    const highlights = (project.keyImplementations || []).slice(0, 6).map(item => `<li>${item}</li>`).join('');
+
+    const stackGroups = (project.stackGroups || []).map(group => {
+      if (!Array.isArray(group.items) || group.items.length === 0) return '';
+      return `
+        <div class="project-stack-group">
+          <span class="project-stack-label">${group.label}</span>
+          <div class="project-stack-items">${group.items.map(item => {
+            const key = String(item).toLowerCase();
+            const awsTerms = ['aws','ec2','s3','iam','vpc','alb','route','cloudwatch','lambda'];
+            if (awsTerms.some(t => key.includes(t))) {
+              const style = getSkillStyle(item);
+              const iconHtml = style.svg ? `<img src="${style.svg}" alt="${item} logo" style="width:18px;height:18px;object-fit:contain;display:block;">` : `<i class="${style.icon}"></i>`;
+              return `<span class="tag" style="--tag-color: ${style.color || '#FF9900'};"><span class="tag-icon" style="color: ${style.color || '#FF9900'}; border-color: ${style.color || '#FF9900'}33;">${iconHtml}</span><span class="tag-label">${item}</span></span>`;
+            }
+            return `<span class="tag">${item}</span>`;
+          }).join('')}</div>
+        </div>
+      `;
     }).join('');
 
     card.innerHTML = `
-      <h3>${project.title}</h3>
-      <p>${project.shortDescription}</p>
-      <div class="tags">${techTags}</div>
-      <p><a href="${project.github || '#'}" target="_blank">GitHub</a> · <a href="${project.liveDemo || '#'}" target="_blank">Live Demo</a></p>
+      <div class="project-header-row">
+        <span class="project-number">PROJECT ${String(project.projectNumber || project.id || 1).padStart(2, '0')}</span>
+        <span class="project-category">${project.category || 'Cloud Infrastructure & DevOps'}</span>
+      </div>
+      <div class="project-body">
+        <div class="project-information">
+          <h3>${project.title}</h3>
+          <p class="project-overview">${project.overview || project.shortDescription || project.description}</p>
+          <div class="project-highlights-wrap">
+            <h4>Key Implementations</h4>
+            <ul class="project-highlights">${highlights}</ul>
+          </div>
+          <div class="project-stack">${stackGroups}</div>
+          <div class="project-actions">
+            <button class="project-btn project-btn-primary" type="button" data-project-detail="${project.id}">View Project Details</button>
+          </div>
+        </div>
+        <div class="project-architecture" aria-label="${project.title} DevOps architecture visualization">
+          <div class="architecture-heading">
+            <span>DEVOPS ARCHITECTURE</span>
+            <span class="architecture-status"><i></i> LIVE FLOW</span>
+          </div>
+          <div class="architecture-stage">
+            <div class="architecture-boundary">
+              <span class="architecture-boundary-label"><i class="fa-brands fa-aws" aria-hidden="true"></i>${architecture.boundaryLabel}</span>
+              <span class="architecture-zone-label">${architectureBoundary}</span>
+            </div>
+            <svg class="architecture-lines" viewBox="0 0 100 490" preserveAspectRatio="none" aria-hidden="true">
+              ${architecturePaths}
+            </svg>
+            ${architectureNodes}
+          </div>
+          <div class="architecture-caption">Automated delivery pipeline with connected infrastructure zones</div>
+        </div>
+      </div>
     `;
+
+    const detailButton = card.querySelector('[data-project-detail]');
+    if (detailButton) {
+      detailButton.addEventListener('click', () => {
+        const modal = document.createElement('div');
+        modal.className = 'project-modal-backdrop';
+
+        const detailSections = (project.detailSections || []).map(section => `
+          <div class="project-modal-section">
+            <h4>${section.title}</h4>
+            <p>${section.text}</p>
+          </div>
+        `).join('');
+
+        const techDetail = (project.technologies || []).map(tech => {
+          const key = String(tech).toLowerCase();
+          const awsTerms = ['aws','ec2','s3','iam','vpc','alb','route','cloudwatch','lambda'];
+          if (awsTerms.some(t => key.includes(t))) {
+            const style = getSkillStyle(tech);
+            const iconHtml = style.svg ? `<img src="${style.svg}" alt="${tech} logo" style="width:18px;height:18px;object-fit:contain;display:block;">` : `<i class="${style.icon}"></i>`;
+            return `<span class="tag" style="--tag-color: ${style.color || '#FF9900'};"><span class="tag-icon" style="color: ${style.color || '#FF9900'}; border-color: ${style.color || '#FF9900'}33;">${iconHtml}</span><span class="tag-label">${tech}</span></span>`;
+          }
+          return `<span class="tag">${tech}</span>`;
+        }).join('');
+
+        modal.innerHTML = `
+          <div class="project-modal" role="dialog" aria-modal="true">
+            <button class="project-modal-close" type="button" aria-label="Close project details">×</button>
+            <div class="project-header-row">
+              <span class="project-number">PROJECT ${String(project.projectNumber || project.id || 1).padStart(2, '0')}</span>
+              <span class="project-category">${project.category || 'Cloud Infrastructure & DevOps'}</span>
+            </div>
+            <h3>${project.title}</h3>
+            <p class="project-description">${project.description || project.shortDescription}</p>
+            ${detailSections}
+            <div class="project-modal-section">
+              <h4>Technologies Used</h4>
+              <div class="tags">${techDetail}</div>
+            </div>
+          </div>
+        `;
+        const closeButton = modal.querySelector('.project-modal-close');
+        closeButton.addEventListener('click', () => modal.remove());
+        modal.addEventListener('click', (event) => {
+          if (event.target === modal) modal.remove();
+        });
+        document.body.appendChild(modal);
+      });
+    }
+
     container.appendChild(card);
   });
 }

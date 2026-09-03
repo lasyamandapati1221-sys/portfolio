@@ -10,7 +10,7 @@
     "github": "https://github.com/lasyamandapati1221-sys",
     "linkedin": "https://www.linkedin.com/in/lasya-mandapati",
     "profileImage": "assets/profile.jpeg",
-    "resume": "assets/1786542915240-LASYA_CV.pdf",
+    "resume": "assets/Lasya MandapatiCV.pdf",
     "architectureImage": "assets/architecture1.png"
   },
   "about": {
@@ -103,7 +103,7 @@
   "training": [
     {
       "id": 1,
-      "title": "AWS Fundamentals Hands-On Learning Notes",
+      "title": "AWS Hands-On Practice",
       "description": "A step-by-step walkthrough of core AWS services, server setup, storage, scaling, and access management documented during practical console implementation.",
       "tags": [
         "EC2",
@@ -116,27 +116,175 @@
         "IAM"
       ],
       "pdfUrl": "assets/aws hands-on.pdf"
+    },
+    {
+      "id": 2,
+      "title": "Terraform Hands-On Practice",
+      "description": "A practical Terraform walkthrough covering infrastructure provisioning, modules, variables, state management, and reusable automation patterns for cloud environments.",
+      "tags": [
+        "Terraform",
+        "Providers",
+        "Variables",
+        "Outputs",
+        "Modules",
+        "State",
+        "Resource Blocks",
+        "Automation"
+      ],
+      "pdfUrl": "assets/Terraform_Hands_On.pdf"
+    },
+    {
+      "id": 3,
+      "title": "Prometheus & Grafana Hands-On Practice",
+      "description": "A practical walkthrough of Prometheus and Grafana for collecting metrics, building dashboards, and monitoring cloud and application environments.",
+      "tags": [
+        "Prometheus",
+        "Grafana",
+        "Metrics",
+        "Dashboards",
+        "Monitoring",
+        "Alerting"
+      ],
+      "pdfUrl": "assets/Prometheus_Grafana_Hands-On.pdf"
     }
   ],
   "projects": [
     {
       "id": 1,
-      "title": "Highly Available AWS Web Application",
+      "title": "CI/CD Pipeline for E-commerce Application",
       "projectNumber": 1,
-      "shortDescription": "Automated deployment of a resilient web application with Terraform and ECS.",
-      "description": "Designed a fault-tolerant architecture with autoscaling, load balancing, and secure networking across multiple availability zones.",
+      "category": "END-TO-END DEVOPS CI/CD",
+      "shortDescription": "Designed and implemented an end-to-end CI/CD workflow for an e-commerce-style application using AWS infrastructure, Jenkins automation, Ansible deployment, code quality analysis, and monitoring.",
+      "description": "Designed and implemented an end-to-end CI/CD pipeline for an e-commerce-style application using AWS infrastructure, Jenkins automation, Ansible deployment, code quality analysis, and monitoring.",
+      "overview": "Built an end-to-end DevOps pipeline to automate infrastructure provisioning, application delivery, code quality checks, and observability for an e-commerce-style application using AWS and modern automation tools.",
       "technologies": [
         "AWS",
         "Terraform",
-        "ECS",
-        "ALB",
-        "CloudWatch"
+        "Jenkins",
+        "Ansible",
+        "Prometheus",
+        "Grafana",
+        "Git",
+        "SonarQube",
+        "Apache Tomcat"
       ],
-      "github": "https://github.com/lasya/aws-web-app",
-      "liveDemo": "https://example-app.aws",
+      "workflow": [
+        "AWS",
+        "Terraform",
+        "Jenkins",
+        "SonarQube",
+        "Ansible",
+        "Tomcat",
+        "Prometheus",
+        "Grafana"
+      ],
+      "highlights": [
+        "Infrastructure as Code",
+        "Automated CI/CD",
+        "Security & Code Quality",
+        "Monitoring & Alerting"
+      ],
+      "keyImplementations": [
+        "Infrastructure as Code: Terraform provisions AWS infrastructure including VPC, EC2, S3, RDS, and IAM.",
+        "Automated CI/CD: Jenkins automates build, testing, and deployment across the application lifecycle.",
+        "Automated Configuration & Deployment: Ansible automates deployment to Apache Tomcat.",
+        "Code Quality & Security: SonarQube and Ansible Vault improve code quality and secret protection.",
+        "Monitoring & Observability: Prometheus and Grafana provide metrics, visualization, and alerting.",
+        "Storage & Reliability: S3 versioning, cross-region replication, and AWS scaling/optimization concepts support resilient operations."
+      ],
+      "stackGroups": [
+        { "label": "Cloud", "items": ["AWS"] },
+        { "label": "Infrastructure", "items": ["Terraform"] },
+        { "label": "CI/CD", "items": ["Jenkins"] },
+        { "label": "Code Quality", "items": ["SonarQube"] },
+        { "label": "Configuration", "items": ["Ansible"] },
+        { "label": "Application", "items": ["Apache Tomcat"] },
+        { "label": "Monitoring", "items": ["Prometheus", "Grafana"] },
+        { "label": "Version Control", "items": ["Git"] }
+      ],
+      "detailSections": [
+        { "title": "Project Overview", "text": "Designed and implemented an end-to-end CI/CD pipeline for an e-commerce-style application using AWS infrastructure, Jenkins automation, Ansible deployment, code quality analysis, and monitoring." },
+        { "title": "Architecture / Workflow", "text": "Developer → Git → Jenkins → SonarQube → Terraform/AWS infrastructure → Ansible → Tomcat → Prometheus → Grafana" },
+        { "title": "Infrastructure", "text": "Terraform was used to provision AWS resources including VPC, EC2, S3, RDS, and IAM, enabling repeatable cloud infrastructure management." },
+        { "title": "CI/CD Implementation", "text": "Jenkins orchestrated the application build, testing, and deployment pipeline, ensuring automated delivery from code to runtime." },
+        { "title": "Security", "text": "Sensitive configuration values were protected using Ansible Vault, while SonarQube improved code quality and secure delivery practices." },
+        { "title": "Monitoring", "text": "Prometheus and Grafana were configured to collect metrics, visualize infrastructure and application health, and support alerting." },
+        { "title": "Scaling / Reliability", "text": "AWS optimization concepts included right-sizing and Auto Scaling to improve infrastructure efficiency and resilience." },
+        { "title": "Technologies Used", "text": "AWS, Terraform, Jenkins, Ansible, Prometheus, Grafana, Git, SonarQube, Apache Tomcat." }
+      ],
       "featured": true,
       "image": "",
-      "architecture": "Infrastructure as Code with Terraform, container registry, and a CI/CD pipeline for deployments."
+      "architecture": "Infrastructure as Code with Terraform and CI/CD automation for application delivery.",
+      "architectureImage": "assets/architecture.png"
+    },
+    {
+      "id": 2,
+      "title": "Kubernetes-based Microservices Deployment",
+      "projectNumber": 2,
+      "category": "CONTAINERIZED MICROSERVICES / GITOPS",
+      "shortDescription": "Implemented a containerized microservices deployment workflow using Docker, Kubernetes, Amazon EKS, Terraform, Helm, Argo CD, and observability tools.",
+      "description": "Implemented a containerized microservices deployment workflow using Docker, Kubernetes, Amazon EKS, Terraform, Helm, Argo CD, and observability tools.",
+      "overview": "Implemented a GitOps-driven microservices platform using Docker, Kubernetes, Amazon EKS, Terraform, Helm, and observability tooling to automate container delivery and workload scaling.",
+      "technologies": [
+        "Docker",
+        "Kubernetes",
+        "Amazon EKS",
+        "Helm",
+        "Argo CD",
+        "Terraform",
+        "Prometheus",
+        "Grafana",
+        "AWS"
+      ],
+      "workflow": [
+        "Terraform",
+        "AWS / EKS",
+        "Docker",
+        "Kubernetes",
+        "Helm",
+        "Argo CD",
+        "Prometheus",
+        "Grafana"
+      ],
+      "highlights": [
+        "Containerization",
+        "Kubernetes Orchestration",
+        "GitOps with Argo CD",
+        "Monitoring & Auto Scaling"
+      ],
+      "keyImplementations": [
+        "Infrastructure Automation: Terraform provisions the Amazon EKS environment.",
+        "Containerization: Docker images are built and managed for microservices.",
+        "Kubernetes Deployment: Applications are deployed and managed using Kubernetes/EKS.",
+        "Helm Packaging: Helm charts package and manage Kubernetes applications.",
+        "GitOps Delivery: Argo CD provides automated GitOps-based application delivery.",
+        "Auto Scaling: HPA automatically scales workloads according to resource utilization.",
+        "Security & Resource Management: RBAC, namespaces, and resource quotas manage access and resources.",
+        "Monitoring & Observability: Prometheus and Grafana provide monitoring, visualization, and alerting."
+      ],
+      "stackGroups": [
+        { "label": "Cloud", "items": ["AWS / EKS"] },
+        { "label": "Containers", "items": ["Docker"] },
+        { "label": "Orchestration", "items": ["Kubernetes"] },
+        { "label": "Packaging", "items": ["Helm"] },
+        { "label": "GitOps", "items": ["Argo CD"] },
+        { "label": "Infrastructure", "items": ["Terraform"] },
+        { "label": "Monitoring", "items": ["Prometheus", "Grafana"] }
+      ],
+      "detailSections": [
+        { "title": "Project Overview", "text": "Implemented a containerized microservices deployment workflow using Docker, Kubernetes, Amazon EKS, Terraform, Helm, Argo CD, and observability tools." },
+        { "title": "Architecture / Workflow", "text": "Source Code → Docker Image → Container Registry → Amazon EKS → Kubernetes → Helm → Argo CD → HPA → Prometheus → Grafana" },
+        { "title": "Infrastructure", "text": "Terraform automated the provisioning of the Amazon EKS environment and supporting cloud resources for the cluster and workloads." },
+        { "title": "Deployment Process", "text": "Docker images were built and pushed to a private registry, then deployed to Kubernetes with Helm-managed configuration and Argo CD-driven delivery." },
+        { "title": "Security", "text": "RBAC, namespaces, and resource quotas were implemented to manage access, isolation, and resource allocation across workloads." },
+        { "title": "Monitoring", "text": "Prometheus and Grafana were configured to monitor Kubernetes cluster health, workload metrics, and application performance." },
+        { "title": "Scaling / Reliability", "text": "Horizontal Pod Autoscaler and proactive monitoring practices helped improve workload scaling, availability, and operational resilience." },
+        { "title": "Technologies Used", "text": "Docker, Kubernetes, Amazon EKS, Helm, Argo CD, Terraform, Prometheus, Grafana, AWS." }
+      ],
+      "featured": true,
+      "image": "",
+      "architecture": "Container orchestration with Amazon EKS, Helm packaging, GitOps delivery, and monitoring for resilient deployments.",
+      "architectureImage": ""
     }
   ],
   "certifications": [
